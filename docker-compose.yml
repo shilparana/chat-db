@@ -1,0 +1,338 @@
+version: '3.8'
+
+services:
+  postgres-ecommerce:
+    image: postgres:15
+    container_name: postgres-ecommerce
+    environment:
+      POSTGRES_DB: ecommerce_db
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpass123
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init-scripts/postgres-ecommerce:/docker-entrypoint-initdb.d
+      - postgres-ecommerce-data:/var/lib/postgresql/data
+    networks:
+      - db-network
+
+  postgres-finance:
+    image: postgres:15
+    container_name: postgres-finance
+    environment:
+      POSTGRES_DB: finance_db
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpass123
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./init-scripts/postgres-finance:/docker-entrypoint-initdb.d
+      - postgres-finance-data:/var/lib/postgresql/data
+    networks:
+      - db-network
+
+  postgres-healthcare:
+    image: postgres:15
+    container_name: postgres-healthcare
+    environment:
+      POSTGRES_DB: healthcare_db
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpass123
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./init-scripts/postgres-healthcare:/docker-entrypoint-initdb.d
+      - postgres-healthcare-data:/var/lib/postgresql/data
+    networks:
+      - db-network
+
+  postgres-logistics:
+    image: postgres:15
+    container_name: postgres-logistics
+    environment:
+      POSTGRES_DB: logistics_db
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpass123
+    ports:
+      - "5435:5432"
+    volumes:
+      - ./init-scripts/postgres-logistics:/docker-entrypoint-initdb.d
+      - postgres-logistics-data:/var/lib/postgresql/data
+    networks:
+      - db-network
+
+  postgres-hr:
+    image: postgres:15
+    container_name: postgres-hr
+    environment:
+      POSTGRES_DB: hr_db
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpass123
+    ports:
+      - "5436:5432"
+    volumes:
+      - ./init-scripts/postgres-hr:/docker-entrypoint-initdb.d
+      - postgres-hr-data:/var/lib/postgresql/data
+    networks:
+      - db-network
+
+  mysql-crm:
+    image: mysql:8.0
+    container_name: mysql-crm
+    environment:
+      MYSQL_DATABASE: crm_db
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbpass123
+      MYSQL_ROOT_PASSWORD: rootpass123
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init-scripts/mysql-crm:/docker-entrypoint-initdb.d
+      - mysql-crm-data:/var/lib/mysql
+    networks:
+      - db-network
+
+  mysql-inventory:
+    image: mysql:8.0
+    container_name: mysql-inventory
+    environment:
+      MYSQL_DATABASE: inventory_db
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbpass123
+      MYSQL_ROOT_PASSWORD: rootpass123
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./init-scripts/mysql-inventory:/docker-entrypoint-initdb.d
+      - mysql-inventory-data:/var/lib/mysql
+    networks:
+      - db-network
+
+  mysql-sales:
+    image: mysql:8.0
+    container_name: mysql-sales
+    environment:
+      MYSQL_DATABASE: sales_db
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbpass123
+      MYSQL_ROOT_PASSWORD: rootpass123
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./init-scripts/mysql-sales:/docker-entrypoint-initdb.d
+      - mysql-sales-data:/var/lib/mysql
+    networks:
+      - db-network
+
+  mysql-marketing:
+    image: mysql:8.0
+    container_name: mysql-marketing
+    environment:
+      MYSQL_DATABASE: marketing_db
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbpass123
+      MYSQL_ROOT_PASSWORD: rootpass123
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./init-scripts/mysql-marketing:/docker-entrypoint-initdb.d
+      - mysql-marketing-data:/var/lib/mysql
+    networks:
+      - db-network
+
+  mysql-support:
+    image: mysql:8.0
+    container_name: mysql-support
+    environment:
+      MYSQL_DATABASE: support_db
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbpass123
+      MYSQL_ROOT_PASSWORD: rootpass123
+    ports:
+      - "3310:3306"
+    volumes:
+      - ./init-scripts/mysql-support:/docker-entrypoint-initdb.d
+      - mysql-support-data:/var/lib/mysql
+    networks:
+      - db-network
+
+  mongodb-analytics:
+    image: mongo:7.0
+    container_name: mongodb-analytics
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dbuser
+      MONGO_INITDB_ROOT_PASSWORD: dbpass123
+      MONGO_INITDB_DATABASE: analytics_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./init-scripts/mongodb-analytics:/docker-entrypoint-initdb.d
+      - mongodb-analytics-data:/data/db
+    networks:
+      - db-network
+
+  mongodb-logs:
+    image: mongo:7.0
+    container_name: mongodb-logs
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dbuser
+      MONGO_INITDB_ROOT_PASSWORD: dbpass123
+      MONGO_INITDB_DATABASE: logs_db
+    ports:
+      - "27018:27017"
+    volumes:
+      - ./init-scripts/mongodb-logs:/docker-entrypoint-initdb.d
+      - mongodb-logs-data:/data/db
+    networks:
+      - db-network
+
+  mongodb-social:
+    image: mongo:7.0
+    container_name: mongodb-social
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dbuser
+      MONGO_INITDB_ROOT_PASSWORD: dbpass123
+      MONGO_INITDB_DATABASE: social_db
+    ports:
+      - "27019:27017"
+    volumes:
+      - ./init-scripts/mongodb-social:/docker-entrypoint-initdb.d
+      - mongodb-social-data:/data/db
+    networks:
+      - db-network
+
+  mongodb-iot:
+    image: mongo:7.0
+    container_name: mongodb-iot
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dbuser
+      MONGO_INITDB_ROOT_PASSWORD: dbpass123
+      MONGO_INITDB_DATABASE: iot_db
+    ports:
+      - "27020:27017"
+    volumes:
+      - ./init-scripts/mongodb-iot:/docker-entrypoint-initdb.d
+      - mongodb-iot-data:/data/db
+    networks:
+      - db-network
+
+  mongodb-content:
+    image: mongo:7.0
+    container_name: mongodb-content
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dbuser
+      MONGO_INITDB_ROOT_PASSWORD: dbpass123
+      MONGO_INITDB_DATABASE: content_db
+    ports:
+      - "27021:27017"
+    volumes:
+      - ./init-scripts/mongodb-content:/docker-entrypoint-initdb.d
+      - mongodb-content-data:/data/db
+    networks:
+      - db-network
+
+  mariadb-education:
+    image: mariadb:11.0
+    container_name: mariadb-education
+    environment:
+      MYSQL_DATABASE: education_db
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbpass123
+      MYSQL_ROOT_PASSWORD: rootpass123
+    ports:
+      - "3311:3306"
+    volumes:
+      - ./init-scripts/mariadb-education:/docker-entrypoint-initdb.d
+      - mariadb-education-data:/var/lib/mysql
+    networks:
+      - db-network
+
+  mariadb-gaming:
+    image: mariadb:11.0
+    container_name: mariadb-gaming
+    environment:
+      MYSQL_DATABASE: gaming_db
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbpass123
+      MYSQL_ROOT_PASSWORD: rootpass123
+    ports:
+      - "3312:3306"
+    volumes:
+      - ./init-scripts/mariadb-gaming:/docker-entrypoint-initdb.d
+      - mariadb-gaming-data:/var/lib/mysql
+    networks:
+      - db-network
+
+  mariadb-travel:
+    image: mariadb:11.0
+    container_name: mariadb-travel
+    environment:
+      MYSQL_DATABASE: travel_db
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbpass123
+      MYSQL_ROOT_PASSWORD: rootpass123
+    ports:
+      - "3313:3306"
+    volumes:
+      - ./init-scripts/mariadb-travel:/docker-entrypoint-initdb.d
+      - mariadb-travel-data:/var/lib/mysql
+    networks:
+      - db-network
+
+  mariadb-realestate:
+    image: mariadb:11.0
+    container_name: mariadb-realestate
+    environment:
+      MYSQL_DATABASE: realestate_db
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbpass123
+      MYSQL_ROOT_PASSWORD: rootpass123
+    ports:
+      - "3314:3306"
+    volumes:
+      - ./init-scripts/mariadb-realestate:/docker-entrypoint-initdb.d
+      - mariadb-realestate-data:/var/lib/mysql
+    networks:
+      - db-network
+
+  mariadb-events:
+    image: mariadb:11.0
+    container_name: mariadb-events
+    environment:
+      MYSQL_DATABASE: events_db
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbpass123
+      MYSQL_ROOT_PASSWORD: rootpass123
+    ports:
+      - "3315:3306"
+    volumes:
+      - ./init-scripts/mariadb-events:/docker-entrypoint-initdb.d
+      - mariadb-events-data:/var/lib/mysql
+    networks:
+      - db-network
+
+volumes:
+  postgres-ecommerce-data:
+  postgres-finance-data:
+  postgres-healthcare-data:
+  postgres-logistics-data:
+  postgres-hr-data:
+  mysql-crm-data:
+  mysql-inventory-data:
+  mysql-sales-data:
+  mysql-marketing-data:
+  mysql-support-data:
+  mongodb-analytics-data:
+  mongodb-logs-data:
+  mongodb-social-data:
+  mongodb-iot-data:
+  mongodb-content-data:
+  mariadb-education-data:
+  mariadb-gaming-data:
+  mariadb-travel-data:
+  mariadb-realestate-data:
+  mariadb-events-data:
+
+networks:
+  db-network:
+    driver: bridge

@@ -26,7 +26,7 @@ SchemaRetrieverAgent → QueryGeneratorAgent → ExecutionAgent → ResponseForm
 - 🌍 **Multi-Language Support**: Detects and translates queries, returns responses in original language
 - 🗄️ **20+ Databases**: PostgreSQL, MySQL, MariaDB, MongoDB with real-world schemas
 - 🔍 **Vector Schema Search**: Intelligent database selection using semantic matching
-- � **LangSmith Tracing**: Complete workflow observability
+- 📊 **LangSmith Tracing**: Complete workflow observability
 - 🐳 **Docker Ready**: Multi-database setup with one command
 
 ## 🚀 Quick Start
@@ -103,7 +103,7 @@ python chatbot.py
 | `/clear` | Clear screen |
 | `/exit` | Exit chatbot |
 
-## �️ Supported Databases
+## 🗂️ Supported Databases
 
 ### PostgreSQL (5 databases)
 - **postgres-ecommerce** - Products, orders, customers

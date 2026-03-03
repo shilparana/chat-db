@@ -15,9 +15,21 @@ A sophisticated multi-agent system that converts natural language queries into S
 ## 🏗️ Architecture
 
 ```
-User Query → PreprocessingAgent → IntentClassifierAgent → DatabaseSelectorAgent
-    ↓
-SchemaRetrieverAgent → QueryGeneratorAgent → ExecutionAgent → ResponseFormatterAgent
+              User Query
+                  ↓
+        PreprocessingAgent
+                  ↓
+      IntentClassifierAgent
+                  ↓
+      DatabaseSelectorAgent
+                  ↓
+      SchemaRetrieverAgent
+                  ↓
+      QueryGeneratorAgent
+                  ↓
+        ExecutionAgent
+                  ↓
+    ResponseFormatterAgent
 ```
 
 ## ✨ Features
